@@ -12,10 +12,12 @@ const App = (props) => {
                 <div className='content'>
                     <Route path='/profile' render={() => <Profile
                         state={props.appState.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText} />}
+                        dispatch={props.dispatch} />}
                     />
-                    <Route path='/dialogs' render={() => <Dialogs state={props.appState.dialogsPage}/>} />
+                    <Route path='/dialogs' render={() => <Dialogs
+                        state={props.appState.dialogsPage}
+                        dispatch={props.dispatch} />}
+                    />
 
                     {/*<Route path='/profile' component={Profile} />*/}
                     {/*<Route path='/dialogs' component={Dialogs} />*/}
