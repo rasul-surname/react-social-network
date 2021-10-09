@@ -3,18 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from "./redux/redux-store";
-import StoreContext from "./StoreContext";
-
-// let state = [
-//     {id: 1, title: 'Title 1', subtitle: 'Subtitle 1', text: 'Hey hi one'},
-//     {id: 2, title: 'Title 2', subtitle: 'Subtitle 2', text: 'Hey hi two'},
-// ]
+import {Provider} from "react-redux";
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
-        <StoreContext.Provider value={store}>
-        <App appState={state} dispatch={store.dispatch.bind(store)} store={store} />
-        </StoreContext.Provider>,
+        <Provider store={store}>
+            <App appState={state} dispatch={store.dispatch.bind(store)} store={store}/>
+        </Provider>,
         document.getElementById('root')
     );
 }
