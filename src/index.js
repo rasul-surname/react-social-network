@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from "./redux/redux-store";
+import StoreContext from "./StoreContext";
 
 // let state = [
 //     {id: 1, title: 'Title 1', subtitle: 'Subtitle 1', text: 'Hey hi one'},
@@ -11,7 +12,9 @@ import store from "./redux/redux-store";
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
-        <App appState={state} dispatch={store.dispatch.bind(store)} store={store} />,
+        <StoreContext.Provider value={store}>
+        <App appState={state} dispatch={store.dispatch.bind(store)} store={store} />
+        </StoreContext.Provider>,
         document.getElementById('root')
     );
 }
