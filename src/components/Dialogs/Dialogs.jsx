@@ -19,13 +19,13 @@ const Dialogs = (props) => {
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
                 {props.state.dialogsData.map(data => {
-                    return <DialogItem name={data.name} id={data.id} />
+                    return <DialogItem name={data.name} key={data.id} id={data.id} />
                 })}
             </div>
             <div className={classes.messages}>
                 <div>
                     {props.state.messagesData.map(data => {
-                        return <Message message={data.message} id={data.id} />
+                        return <Message message={data.message} key={data.id} id={data.id} />
                     })}
                 </div>
                     <div>
