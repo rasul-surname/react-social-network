@@ -9,7 +9,7 @@ const Posts = (props) => {
         <div>
             {props.state.map(elem => {
                 return (
-                    <NavLink to={'item' + elem.id} activeClassName={classes.active}>
+                    <NavLink to={'/blog/item' + elem.id} activeClassName={classes.active}>
                         <PostItem title={elem.title} subtitle={elem.subtitle} />
                     </NavLink>
                 )

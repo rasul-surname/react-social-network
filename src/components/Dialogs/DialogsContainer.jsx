@@ -4,6 +4,34 @@ import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
 import {connect} from "react-redux";
 
+
+let mapStateToProps = (state) => {
+     return {
+        state: state.dialogsPage
+     }
+}
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateNewMessageBody: (text) => {
+            dispatch(updateNewMessageTextChangeActionCreator(text))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageActionCreator());
+        },
+    }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+export default DialogsContainer;
+
+
+
+
+
+
+
+
 // const DialogsContainer = (props) => {
 //
 //     return (
@@ -28,23 +56,3 @@ import {connect} from "react-redux";
 //         </StoreContext.Consumer>
 //     )
 // }
-
-let mapStateToProps = (state) => {
-     return {
-        state: state.dialogsPage
-     }
-}
-let mapDispatchToProps = (dispatch) => {
-    return {
-        updateNewMessageBody: (text) => {
-            dispatch(updateNewMessageTextChangeActionCreator(text))
-        },
-        sendMessage: () => {
-            dispatch(sendMessageActionCreator());
-        },
-    }
-}
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-export default DialogsContainer;
