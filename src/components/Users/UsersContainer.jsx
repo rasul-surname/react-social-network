@@ -4,7 +4,7 @@ import {followAC, setCurrentAC, setUsersTotalAC, setUsersAC, unfollowAC} from ".
 import Users from "./Users";
 import * as axios from "axios";
 
-class UsersContainert extends React.Component {
+class UsersContainer extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -12,20 +12,20 @@ class UsersContainert extends React.Component {
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
 
-            this.props.setUsers(
+            this.props.setUsersAC(
                 response.data.items
             )
-            this.props.setTotalUsersCount(
+            this.props.setUsersTotalAC(
                 response.data.totalCount
             )
         });
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
+        this.props.setCurrentAC(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
 
-            this.props.setUsers(
+            this.props.setUsersAC(
                 response.data.items
             )
         });
@@ -53,27 +53,34 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching,
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentAC(pageNumber));
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setUsersTotalAC(totalCount))
-        }
-    }
-}
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (userId) => {
+//             dispatch(followAC(userId));
+//         },
+//         unfollow: (userId) => {
+//             dispatch(unfollowAC(userId));
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users));
+//         },
+//         setCurrentPage: (pageNumber) => {
+//             dispatch(setCurrentAC(pageNumber));
+//         },
+//         setTotalUsersCount: (totalCount) => {
+//             dispatch(setUsersTotalAC(totalCount))
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainert);
+export default connect(mapStateToProps, {
+    followAC,
+    unfollowAC,
+    setUsersAC,
+    setCurrentAC,
+    setUsersTotalAC
+})(UsersContainer);
